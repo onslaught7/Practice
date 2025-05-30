@@ -1,12 +1,12 @@
-var menu = [
+const menu = [
     { name: "Margherita", price: 8 },
     { name: "Pepporoni", price: 9 },
     { name: "Hawaian", price: 8 },
     { name: "Veggie", price: 9 }
 ];
-var cashInRegister = 100;
-var nextOrderId = 1;
-var orderQueue = [];
+let cashInRegister = 100;
+let nextOrderId = 1;
+const orderQueue = [];
 function addNewPizza(pizza) {
     menu.push(pizza);
     return menu;
@@ -19,9 +19,9 @@ function placeOrder(pizzaName) {
     //         break;
     //     }
     // }
-    var selectedPizza = menu.find(function (pizzaObj) { return pizzaObj.name === pizzaName; });
+    const selectedPizza = menu.find(pizzaObj => pizzaObj.name === pizzaName);
     if (selectedPizza) {
-        var newOrder = { id: nextOrderId++, name: selectedPizza, status: "Ordered" };
+        const newOrder = { id: nextOrderId++, name: selectedPizza, status: "Ordered" };
         orderQueue.push(newOrder);
         cashInRegister += selectedPizza.price;
     }
@@ -31,7 +31,7 @@ function placeOrder(pizzaName) {
     return orderQueue;
 }
 function completeOrder(orderId) {
-    var order = orderQueue.find(function (orderObj) { return orderObj.id == orderId; });
+    const order = orderQueue.find(orderObj => orderObj.id == orderId);
     if (order) {
         order.status = "Completed";
     }
