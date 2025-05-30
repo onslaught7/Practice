@@ -1,15 +1,4 @@
-type Menu = {
-    name: string
-    price: number
-}
-
-type Order = {
-    id: number,
-    name: Menu,
-    status: string
-}
-
-const menu: Menu[] = [
+const menu: {name: string, price: number}[] = [
     { name: "Margherita", price: 8},
     { name: "Pepporoni", price: 9},
     { name: "Hawaian", price: 8},
@@ -18,9 +7,9 @@ const menu: Menu[] = [
 
 let cashInRegister: number = 100;
 let nextOrderId: number = 1;
-const orderQueue: Order[] = [];
+const orderQueue: {id: number, name: {name: string, price: number}, status: string}[] = [];
 
-function addNewPizza(pizza: Menu) {
+function addNewPizza(pizza: {name: string, price: number}) {
     menu.push(pizza);
 
     return menu;
@@ -36,7 +25,7 @@ function placeOrder(pizzaName: string) {
     // }
     const selectedPizza = menu.find(pizzaObj => pizzaObj.name === pizzaName);
     if (selectedPizza) {
-        const newOrder: Order = { id: nextOrderId++, name: selectedPizza, status: "Ordered" }
+        const newOrder: {id: number, name: {name: string, price: number}, status: string} = { id: nextOrderId++, name: selectedPizza, status: "Ordered" }
         orderQueue.push(newOrder);
         cashInRegister += selectedPizza.price;
     } else {
