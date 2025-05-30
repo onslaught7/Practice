@@ -1,11 +1,11 @@
 type Menu = {
-    name: string,
+    name: string
     price: number
 }
 
 type Order = {
     id: number,
-    name: { name: string, price: number},
+    name: Menu,
     status: string
 }
 
