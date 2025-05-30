@@ -41,3 +41,4 @@ console.log(addNewPizza({ name: "Smoked Salmon", price: 10 }));
 console.log(placeOrder("Margherita"));
 console.log(cashInRegister);
 console.log(completeOrder(1));
+//# sourceMappingURL=index.js.map
