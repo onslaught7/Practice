@@ -37,20 +37,20 @@ function placeOrder(pizzaName: string) {
     const selectedPizza = menu.find(pizzaObj => pizzaObj.name === pizzaName);
     if (selectedPizza) {
         const newOrder: Order = { id: nextOrderId++, name: selectedPizza, status: "ordered" }
-        orderQueue.push(newOrder);
+        orderHistory.push(newOrder);
         cashInRegister += selectedPizza.price;
     } else {
         return;
     }
-    return orderQueue;
+    return orderHistory;
 }
 
 function completeOrder(orderId: number) {
-    const order = orderQueue.find(orderObj => orderObj.id == orderId);
+    const order = orderHistory.find(orderObj => orderObj.id == orderId);
     if (order) {
         order.status = "completed";
     }
-    return orderQueue;
+    return orderHistory;
 }
 
 console.log(addNewPizza({name: "Smoked Salmon", price: 10}));
