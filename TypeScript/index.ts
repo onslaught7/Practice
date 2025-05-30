@@ -1,4 +1,9 @@
-const menu: {name: string, price: number}[] = [
+type Pizza = {
+    name: string
+    price: number
+}
+
+const menu = [
     { name: "Margherita", price: 8},
     { name: "Pepporoni", price: 9},
     { name: "Hawaian", price: 8},
@@ -7,9 +12,9 @@ const menu: {name: string, price: number}[] = [
 
 let cashInRegister: number = 100;
 let nextOrderId: number = 1;
-const orderQueue: {id: number, name: {name: string, price: number}, status: string}[] = [];
+const orderQueue = [];
 
-function addNewPizza(pizza: {name: string, price: number}) {
+function addNewPizza(pizza: Pizza) {
     menu.push(pizza);
 
     return menu;
