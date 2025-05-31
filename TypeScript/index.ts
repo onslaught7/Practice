@@ -12,7 +12,7 @@ type Order = {
 
 const menu: Pizza[] = [
     { id: 1, name: "Margherita", price: 8},
-    { id: 2, name: "Pepporoni", price: 9},
+    { id: 2, name: "Pepperoni", price: 9},
     { id: 3, name: "Hawaian", price: 8},
     { id: 4, name: "Veggie", price: 9}
 ];
@@ -54,8 +54,18 @@ function completeOrder(orderId: number) {
     return orderHistory;
 }
 
+function getPizzaDetail(identifier: string | number) {
+    const pizza = menu.find(pizzaObj => pizzaObj.name === identifier || pizzaObj.id === identifier);
+    if (!pizza) {
+        return;
+    }
+    return pizza;
+}
+
 console.log("Added new pizza: ", addNewPizza({id: 5, name: "Smoked Salmon", price: 10}));
-console.log("Added new pizza: ", addNewPizza({id: 6, name: "Smoked Salmon", price: 10}));
+console.log("Added new pizza: ", addNewPizza({id: 6, name: "Chicken BBQ", price: 10}));
 console.log(placeOrder("Margherita"));
 console.log(cashInRegister);
 console.log(completeOrder(1));
+console.log("Details of the pizza: ", getPizzaDetail(3));
+console.log("Details of the pizza: ", getPizzaDetail("Pepperoni"));

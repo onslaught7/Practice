@@ -1,12 +1,12 @@
 const menu = [
-    { name: "Margherita", price: 8 },
-    { name: "Pepporoni", price: 9 },
-    { name: "Hawaian", price: 8 },
-    { name: "Veggie", price: 9 }
+    { id: 1, name: "Margherita", price: 8 },
+    { id: 2, name: "Pepperoni", price: 9 },
+    { id: 3, name: "Hawaian", price: 8 },
+    { id: 4, name: "Veggie", price: 9 }
 ];
 let cashInRegister = 100;
 let nextOrderId = 1;
-const orderQueue = [];
+const orderHistory = [];
 function addNewPizza(pizza) {
     menu.push(pizza);
     return menu;
@@ -21,24 +21,34 @@ function placeOrder(pizzaName) {
     // }
     const selectedPizza = menu.find(pizzaObj => pizzaObj.name === pizzaName);
     if (selectedPizza) {
-        const newOrder = { id: nextOrderId++, name: selectedPizza, status: "Ordered" };
-        orderQueue.push(newOrder);
+        const newOrder = { id: nextOrderId++, name: selectedPizza, status: "ordered" };
+        orderHistory.push(newOrder);
         cashInRegister += selectedPizza.price;
     }
     else {
         return;
     }
-    return orderQueue;
+    return orderHistory;
 }
 function completeOrder(orderId) {
-    const order = orderQueue.find(orderObj => orderObj.id == orderId);
+    const order = orderHistory.find(orderObj => orderObj.id == orderId);
     if (order) {
-        order.status = "Completed";
+        order.status = "completed";
     }
-    return orderQueue;
+    return orderHistory;
 }
-console.log(addNewPizza({ name: "Smoked Salmon", price: 10 }));
+function getPizzaDetail(identifier) {
+    const pizza = menu.find(pizzaObj => pizzaObj.name === identifier || pizzaObj.id === identifier);
+    if (!pizza) {
+        return;
+    }
+    return pizza;
+}
+console.log("Added new pizza: ", addNewPizza({ id: 5, name: "Smoked Salmon", price: 10 }));
+console.log("Added new pizza: ", addNewPizza({ id: 6, name: "Chicken BBQ", price: 10 }));
 console.log(placeOrder("Margherita"));
 console.log(cashInRegister);
 console.log(completeOrder(1));
+console.log("Details of the pizza: ", getPizzaDetail(3));
+console.log("Details of the pizza: ", getPizzaDetail("Pepperoni"));
 //# sourceMappingURL=index.js.map
