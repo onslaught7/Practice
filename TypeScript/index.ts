@@ -10,24 +10,24 @@ type Order = {
     status: "ordered" | "completed"
 }
 
-const menu: Pizza[] = [
-    { id: 1, name: "Margherita", price: 8},
-    { id: 2, name: "Pepperoni", price: 9},
-    { id: 3, name: "Hawaian", price: 8},
-    { id: 4, name: "Veggie", price: 9}
-];
 
 let cashInRegister: number = 100;
 let nextOrderId: number = 1;
+let nextPizzaId: number = 1;
 const orderHistory: Order[] = [];
 
-function addNewPizza(pizza: Pizza) {
-    menu.push(pizza);
+const menu: Pizza[] = [
+    { id: nextPizzaId++, name: "Margherita", price: 8},
+    { id: nextPizzaId++, name: "Pepperoni", price: 9},
+    { id: nextPizzaId++, name: "Hawaian", price: 8},
+    { id: nextPizzaId++, name: "Veggie", price: 9}
+];
 
-    return menu;
+function addNewPizza(pizza: Pizza): void {
+    menu.push(pizza);
 }   
 
-function placeOrder(pizzaName: string) {
+function placeOrder(pizzaName: string): Order | undefined {
     // for (const pizza of menu) {
     //     if (pizza.name === pizzaName) {
     //         cashInRegister += pizza.price;
@@ -36,22 +36,23 @@ function placeOrder(pizzaName: string) {
     //     }
     // }
     const selectedPizza = menu.find(pizzaObj => pizzaObj.name === pizzaName);
-    if (selectedPizza) {
-        const newOrder: Order = { id: nextOrderId++, name: selectedPizza, status: "ordered" }
-        orderHistory.push(newOrder);
-        cashInRegister += selectedPizza.price;
-    } else {
+    if (!selectedPizza) {
         return;
-    }
-    return orderHistory;
+    } 
+    const newOrder: Order = { id: nextOrderId++, name: selectedPizza, status: "ordered" }
+    orderHistory.push(newOrder);
+    cashInRegister += selectedPizza.price;
+
+    return newOrder;
 }
 
-function completeOrder(orderId: number) {
+function completeOrder(orderId: number): Order | undefined {
     const order = orderHistory.find(orderObj => orderObj.id == orderId);
-    if (order) {
-        order.status = "completed";
+    if (!order) {
+        return; 
     }
-    return orderHistory;
+    order.status = "completed";
+    return order;
 }
 
 export function getPizzaDetail(identifier: string | number): Pizza | undefined {
@@ -64,10 +65,11 @@ export function getPizzaDetail(identifier: string | number): Pizza | undefined {
     }
 }
 
-console.log("Added new pizza: ", addNewPizza({id: 5, name: "Smoked Salmon", price: 10}));
-console.log("Added new pizza: ", addNewPizza({id: 6, name: "Chicken BBQ", price: 10}));
+addNewPizza({id: nextPizzaId++, name: "Smoked Salmon", price: 10});
+addNewPizza({id: nextPizzaId++, name: "Chicken BBQ", price: 10});
 console.log(placeOrder("Margherita"));
 console.log(cashInRegister);
 console.log(completeOrder(1));
 console.log("Details of the pizza: ", getPizzaDetail(3));
 console.log("Details of the pizza: ", getPizzaDetail("Pepperoni"));
+console.log(menu)
