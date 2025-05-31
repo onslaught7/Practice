@@ -32,13 +32,6 @@ function addNewPizza(pizza: Omit<Pizza, "id">): void {
 }   
 
 function placeOrder(pizzaName: string): Order | undefined {
-    // for (const pizza of menu) {
-    //     if (pizza.name === pizzaName) {
-    //         cashInRegister += pizza.price;
-    //         orderQueue.push(pizza);
-    //         break;
-    //     }
-    // }
     const selectedPizza = menu.find(pizzaObj => pizzaObj.name === pizzaName);
     if (!selectedPizza) {
         return;
