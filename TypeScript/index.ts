@@ -55,11 +55,11 @@ function completeOrder(orderId: number) {
 }
 
 function getPizzaDetail(identifier: string | number) {
-    const pizza = menu.find(pizzaObj => pizzaObj.name === identifier || pizzaObj.id === identifier);
-    if (!pizza) {
-        return;
+    if (typeof identifier === "string") {
+        return menu.find(pizzaObj => pizzaObj.name.toLowerCase() === identifier.toLowerCase());
+    } else if (typeof identifier === "number") {
+        return menu.find(pizzaObj => pizzaObj.id === identifier);
     }
-    return pizza;
 }
 
 console.log("Added new pizza: ", addNewPizza({id: 5, name: "Smoked Salmon", price: 10}));

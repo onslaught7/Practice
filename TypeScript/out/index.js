@@ -38,11 +38,12 @@ function completeOrder(orderId) {
     return orderHistory;
 }
 function getPizzaDetail(identifier) {
-    const pizza = menu.find(pizzaObj => pizzaObj.name === identifier || pizzaObj.id === identifier);
-    if (!pizza) {
-        return;
+    if (typeof identifier === "string") {
+        return menu.find(pizzaObj => pizzaObj.name.toLowerCase() === identifier.toLowerCase());
     }
-    return pizza;
+    else if (typeof identifier === "number") {
+        return menu.find(pizzaObj => pizzaObj.id === identifier);
+    }
 }
 console.log("Added new pizza: ", addNewPizza({ id: 5, name: "Smoked Salmon", price: 10 }));
 console.log("Added new pizza: ", addNewPizza({ id: 6, name: "Chicken BBQ", price: 10 }));
