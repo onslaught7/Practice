@@ -1,4 +1,5 @@
 type Pizza = {
+    id: number
     name: string
     price: number
 }
@@ -9,11 +10,11 @@ type Order = {
     status: "ordered" | "completed"
 }
 
-const menu = [
-    { name: "Margherita", price: 8},
-    { name: "Pepporoni", price: 9},
-    { name: "Hawaian", price: 8},
-    { name: "Veggie", price: 9}
+const menu: Pizza[] = [
+    { id: 1, name: "Margherita", price: 8},
+    { id: 2, name: "Pepporoni", price: 9},
+    { id: 3, name: "Hawaian", price: 8},
+    { id: 4, name: "Veggie", price: 9}
 ];
 
 let cashInRegister: number = 100;
@@ -53,7 +54,8 @@ function completeOrder(orderId: number) {
     return orderHistory;
 }
 
-console.log(addNewPizza({name: "Smoked Salmon", price: 10}));
+console.log("Added new pizza: ", addNewPizza({id: 5, name: "Smoked Salmon", price: 10}));
+console.log("Added new pizza: ", addNewPizza({id: 6, name: "Smoked Salmon", price: 10}));
 console.log(placeOrder("Margherita"));
 console.log(cashInRegister);
 console.log(completeOrder(1));
