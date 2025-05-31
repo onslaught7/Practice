@@ -54,7 +54,7 @@ function completeOrder(orderId: number) {
     return orderHistory;
 }
 
-export function getPizzaDetail(identifier: string | number) {
+export function getPizzaDetail(identifier: string | number): Pizza | undefined {
     if (typeof identifier === "string") {
         return menu.find(pizzaObj => pizzaObj.name.toLowerCase() === identifier.toLowerCase());
     } else if (typeof identifier === "number") {
