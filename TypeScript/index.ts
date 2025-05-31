@@ -68,7 +68,7 @@ export function getPizzaDetail(identifier: string | number): Pizza | undefined {
     }
 }
 
-addToArray(menu, {id: nextPizzaId++, name: "Carbonara", price: 12}); // Using the generics fucntion
+addToArray<Pizza>(menu, {id: nextPizzaId++, name: "Carbonara", price: 12}); // Using the generics fucntion
 // A clear shortcoming is that, typescript won't check even if we pass any status instead of ordered ar completed
 // Therefore we explicitly type the generic function call with Order type
 addToArray<Order>(orderHistory, {id: nextOrderId++, name: {id: nextPizzaId, name: "Sausage", price: 12}, status: "ordered"});
