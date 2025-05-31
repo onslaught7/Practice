@@ -23,8 +23,12 @@ const menu: Pizza[] = [
     { id: nextPizzaId++, name: "Veggie", price: 9}
 ];
 
-function addNewPizza(pizza: Pizza): void {
-    menu.push(pizza);
+// We use Omit and not partial because we want the user to include evrything but id
+// Refer TypeScript Utility Types documentation for more details
+function addNewPizza(pizza: Omit<Pizza, "id">): void {
+    const id: number= nextPizzaId++;
+    const newPizza: Pizza = {id, ...pizza};
+    menu.push(newPizza);
 }   
 
 function placeOrder(pizzaName: string): Order | undefined {
@@ -65,8 +69,8 @@ export function getPizzaDetail(identifier: string | number): Pizza | undefined {
     }
 }
 
-addNewPizza({id: nextPizzaId++, name: "Smoked Salmon", price: 10});
-addNewPizza({id: nextPizzaId++, name: "Chicken BBQ", price: 10});
+addNewPizza({name: "Smoked Salmon", price: 10});
+addNewPizza({name: "Chicken BBQ", price: 10});
 console.log(placeOrder("Margherita"));
 console.log(cashInRegister);
 console.log(completeOrder(1));

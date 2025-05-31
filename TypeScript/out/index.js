@@ -8,8 +8,12 @@ const menu = [
     { id: nextPizzaId++, name: "Hawaian", price: 8 },
     { id: nextPizzaId++, name: "Veggie", price: 9 }
 ];
+// We use Omit and not partial because we want the user to include evrything but id
+// Refer TypeScript Utility Types documentation for more details
 function addNewPizza(pizza) {
-    menu.push(pizza);
+    const id = nextPizzaId++;
+    const newPizza = Object.assign({ id }, pizza);
+    menu.push(newPizza);
 }
 function placeOrder(pizzaName) {
     // for (const pizza of menu) {
@@ -47,8 +51,8 @@ export function getPizzaDetail(identifier) {
         throw new TypeError("Parameter `identifier` must be either a string or a number");
     }
 }
-addNewPizza({ id: nextPizzaId++, name: "Smoked Salmon", price: 10 });
-addNewPizza({ id: nextPizzaId++, name: "Chicken BBQ", price: 10 });
+addNewPizza({ name: "Smoked Salmon", price: 10 });
+addNewPizza({ name: "Chicken BBQ", price: 10 });
 console.log(placeOrder("Margherita"));
 console.log(cashInRegister);
 console.log(completeOrder(1));
