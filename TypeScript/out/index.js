@@ -37,12 +37,15 @@ function completeOrder(orderId) {
     }
     return orderHistory;
 }
-function getPizzaDetail(identifier) {
+export function getPizzaDetail(identifier) {
     if (typeof identifier === "string") {
         return menu.find(pizzaObj => pizzaObj.name.toLowerCase() === identifier.toLowerCase());
     }
     else if (typeof identifier === "number") {
         return menu.find(pizzaObj => pizzaObj.id === identifier);
+    }
+    else {
+        throw new TypeError("Parameter `identifier` must be either a string or a number");
     }
 }
 console.log("Added new pizza: ", addNewPizza({ id: 5, name: "Smoked Salmon", price: 10 }));
